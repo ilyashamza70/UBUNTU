@@ -1,0 +1,43 @@
+gen 17 10:39:38 hamza-VirtualBox kernel: mtd device must be supplied (device name is empty)
+gen 17 10:39:39 hamza-VirtualBox kernel: [drm:vmw_host_printf [vmwgfx]] *ERROR* Failed to send host log message.
+gen 17 10:39:43 hamza-VirtualBox gnome-session-binary[964]: GLib-GIO-CRITICAL: g_bus_get_sync: assertion 'error == NULL || *error == NULL' failed
+gen 17 10:39:43 hamza-VirtualBox gnome-session-binary[964]: GLib-GIO-CRITICAL: g_bus_get_sync: assertion 'error == NULL || *error == NULL' failed
+gen 17 10:39:44 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:39:44 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:39:46 hamza-VirtualBox pulseaudio[931]: Attivazione da parte di ALSA per leggere nuovi dati dal dispositivo, ma non c'era nulla da leggere.
+gen 17 10:39:46 hamza-VirtualBox pulseaudio[931]: Molto probabilmente si tratta di un bug nei driver ALSA «snd_intel8x0». Segnalare questo problema agli sviluppatori di ALSA.
+gen 17 10:39:46 hamza-VirtualBox pulseaudio[931]: Attivazione avvenuta con POLLIN impostato; tuttavia, una successiva snd_pcm_avail() ha ritornato 0 o un altro valore < min_avail.
+gen 17 10:39:47 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:39:47 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:39:49 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:39:49 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:39:51 hamza-VirtualBox systemd[863]: Failed to start Service for snap application snapd-desktop-integration.snapd-desktop-integration.
+gen 17 10:39:51 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:39:51 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:40:50 hamza-VirtualBox gdm-password][1499]: gkr-pam: unable to locate daemon control file
+gen 17 10:40:52 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:40:52 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:40:57 hamza-VirtualBox pulseaudio[1521]: Attivazione da parte di ALSA per leggere nuovi dati dal dispositivo, ma non c'era nulla da leggere.
+gen 17 10:40:57 hamza-VirtualBox pulseaudio[1521]: Molto probabilmente si tratta di un bug nei driver ALSA «snd_intel8x0». Segnalare questo problema agli sviluppatori di ALSA.
+gen 17 10:40:57 hamza-VirtualBox pulseaudio[1521]: Attivazione avvenuta con POLLIN impostato; tuttavia, una successiva snd_pcm_avail() ha ritornato 0 o un altro valore < min_avail.
+gen 17 10:40:57 hamza-VirtualBox gdm-launch-environment][845]: GLib-GObject: g_object_unref: assertion 'G_IS_OBJECT (object)' failed
+gen 17 10:41:16 hamza-VirtualBox pulseaudio[1521]: GetManagedObjects() failed: org.freedesktop.DBus.Error.NoReply: Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.
+gen 17 10:42:32 hamza-VirtualBox pulseaudio[1521]: Attivazione da parte di ALSA per scrivere nuovi dati sul dispositivo, ma non c'era nulla da scrivere.
+gen 17 10:42:32 hamza-VirtualBox pulseaudio[1521]: Molto probabilmente si tratta di un bug nei driver ALSA «snd_intel8x0». Segnalare questo problema agli sviluppatori di ALSA.
+gen 17 10:42:32 hamza-VirtualBox pulseaudio[1521]: Attivazione avvenuta con POLLOUT impostato; tuttavia, una successiva snd_pcm_avail() ha ritornato 0 o un altro valore < min_avail.
+gen 17 10:42:54 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:42:54 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:42:54 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:42:54 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:42:55 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:42:55 hamza-VirtualBox kernel: [drm:vmw_msg_ioctl [vmwgfx]] *ERROR* Failed to open channel.
+gen 17 10:47:04 hamza-VirtualBox systemd-oomd[475]: Failed to connect to /run/systemd/io.system.ManagedOOM: Connection refused
+gen 17 10:47:04 hamza-VirtualBox systemd-oomd[475]: Failed to acquire varlink connection: Connection refused
+gen 17 10:47:04 hamza-VirtualBox systemd-oomd[475]: Event loop failed: Connection refused
+gen 17 10:51:27 hamza-VirtualBox kernel: ohci-pci 0000:00:06.0: frame counter not updating; disabled
+gen 17 10:51:27 hamza-VirtualBox kernel: ohci-pci 0000:00:06.0: HC died; cleaning up
+gen 17 10:52:56 hamza-VirtualBox systemd-oomd[7505]: Failed to connect to /run/systemd/io.system.ManagedOOM: Connection refused
+gen 17 10:52:56 hamza-VirtualBox systemd-oomd[7505]: Failed to acquire varlink connection: Connection refused
+gen 17 10:52:56 hamza-VirtualBox systemd-oomd[7505]: Event loop failed: Connection refused
+gen 17 10:58:01 hamza-VirtualBox kernel: /dev/loop14: Can't open blockdev
+gen 17 10:59:02 hamza-VirtualBox sudo[46859]:    hamza : 3 incorrect password attempts ; TTY=pts/0 ; PWD=/home/hamza ; USER=root ; COMMAND=apt-update

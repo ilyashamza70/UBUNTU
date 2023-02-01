@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+
+
+int leggi(int filename){
+    int nread=0;
+    char buffer[BUFSIZ];
+    while((nread = read(filename, buffer,BUFSIZ)) > 0){
+        // leggo da stinput
+        write(1,buffer,nread);
+    }
+    if(close(filename)< 0){
+        return -1;
+    }
+    return 1;
+
+}
+
+int main(int argc,char *argv[]){
+    //La funzione non richiede parametri
+    
+
+    if(argc < 2){
+        printf("Errore: insufficenti argomenti deve esserci almeno un file passato ad argomento\n");
+        exit(1);
+    }
+    int fd = 0;
+    for(int i=1;i < argc; i++){
+        fd=open(argv[i],O_RDONLY);
+        if(fd < 0){
+            printf("Errore nell' apertura file %s \n",argv[i]);
+        }
+        if(leggi(fd)<0){
+            exit(5);
+        }
+    }
+
+    
+    exit(0);
+}

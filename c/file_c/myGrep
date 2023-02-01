@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <time.h>
+#include <string.h>
+
+int main(int argc, char *argv[]){
+    if(argc != 3){
+        printf("ERRORE sono attesi 2 argomenti dalla chiamata una string da cercare e un file da cui cercarlo\n");
+        exit(1);
+    }
+    char str[300];
+    if(strcpy(str,argv[1]) <= 0){
+        printf("ERRORE NELLA STRINGA PASSATA COME PRIMO ARGOMENTO %s\n",argv[1]);
+        exit(1);
+    }
+    printf("da cercare in %s la stringa %s\n",argv[2],str);
+    if(open(argv[2],O_RDONLY)< 0){
+        printf("Errore nell apertura del file passato come secondo argomento %s\n",argv[2]);
+        exit(2);
+    }
+
+    printf("Ritorna 0 se ne ha trovgati la grep altimenti != 0\n");
+    int pid;
+    int pid_f;
+    int status;
+    int ret;
+    if((pid = fork())< 0){
+        printf("Errore nella foirk\n");
+        exit(3);
+    }
+    if(pid==0){
+        printf("Eseguo pid figlio con id %d del padre con id %d\n",getpid(),getppid());
+        close(0);
+        if (open(argv[2], O_RDONLY))
+		{ 	printf("Errore in apertura file %s\n", argv[2]);
+			exit(-1);
+		}
+
+        close(1); //Chiudo lòo stdout
+        open("/dev/null",O_WRONLY);
+        close(2);  
+        open("/dev/null",O_WRONLY);
+        execlp("grep","grep", argv[1], argv[2], (char *)0);
+        
+        printf("ERRORE nella esecuzione del grep nel execl");
+        exit(-1);
+    }
+    if((pid_f = wait(&status))< 0){
+        printf("Errroe nella wait da parte del padre\n");
+        exit(4);
+    }
+    if(pid == pid_f){
+        printf("Terminato processo figlio con id %d e status %d\n",pid,status);
+    }
+
+    if(status & 0xFF != 0){
+        printf("Errore terminazione processo %d ANOMALA ERRORE\n",pid);
+    }else{
+        
+        ret = (status >> 8) &0xFF;
+        
+        printf("La Grep della stringa %s nel file %s ha ritornato %d se 255 è un problema\n",argv[1],argv[2],ret);
+    }
+    
+
+
+    exit(0);
+
+
+}

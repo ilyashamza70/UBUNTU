@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+
+#define PERM 0644
+
+int copyfile(char *f1,char *f2){
+    int fd1, fd2;
+    char buffer[BUFSIZ];
+    close(0);//CHIUDO STDIN simulando il mio SO
+    int infile, outfile, nread;
+    if((infile = open(f1,O_RDONLY)) < 0)
+        return 2; //ERRORE se non si riesce ad aprire il file in lettura
+
+    close(2);//CHIUDO STDOUT per simulare il mio SO
+
+    if((outfile = creat(f2,PERM)) < 0){
+        close(infile);
+        return 3;
+        //ERRORE NELLA APERTURA DEL SECONDO FILE
+
+    }
+
+
+
+
+    while((nread = read(infile, buffer,BUFSIZ)) > 0){
+        if(write(outfile,buffer,nread) < nread){
+            close(infile);
+            close(outfile);
+            return 4;
+            //ERRORE NELLA SCRITTURA DA FILE1 A FILE2
+        }
+
+    }   
+    close(infile);
+    close(outfile);
+    return 0;
+
+}
+
+
+int main(int argc, char *argv[]){
+    int status;
+    if(argc != 3 ){
+        printf("ERRORE numero di argomenti passati %d incorretto, \nLa sintassi per argomenti è filesorgente filedestinazione \n",argc-1);
+        exit(1);
+    }
+
+    status=copyfile(argv[1],argv[2]);
+    if(status != 0){
+        printf("Errore durante la copia %d",status);
+        exit(2);
+    }
+    exit(0);
+
+
+    
+}

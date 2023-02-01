@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int main(int argc,char *argv[]){
+    if(argc != 3){
+        printf("ERRORE inseriti %d argometimenti mentre ne sono attesi 2: un nomefile e un intero positivo2\n",argc-1);
+        exit(1);
+    }
+    int fd=0;
+    if((fd = open(argv[1],O_RDONLY)) < 0){
+        printf("ERRORE: %s non è un file o mancano permessi per aprire in lettura\n",argv[1]);
+        exit(2);
+    }
+    int x = atoi(argv[2]);
+    printf("%d e il i-esimo elemnto i cui multipli devo cercare\n",x);
+    if(x <= 0 ){
+        printf("ERRORE il secondo argomento è %s mentre dovrebbe essere un intero positvo strettamente positivo\n",argv[2]);
+        exit(3);
+    }
+
+    int nread=0;
+    char c[1];
+    int size=lseek(fd,0,SEEK_END);
+
+    if(size < 0){
+        printf("EORRR in finding size of file");
+        exit(4);
+    }
+
+    for(int i=0;i < size;i++){
+        if(i*x <= size){
+            if((lseek(fd,i*x,SEEK_SET)) == i*x ){
+                int nread = read(fd,c,1); 
+                printf("Trovato il carattere %s nel file è il multiplo %d-esimo \n",c,x*i);
+
+            }
+        }
+    }
+    close(fd);
+    exit(0);
+}

@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int main(int argc, char *argv[]){
+if(argc != 3){
+    printf("ERRORE sono stati passati %d argomenti mentre devono essere 2 un nomefile e un intero positivo\n",argc-1);
+    exit(1);
+}
+int fd;
+if((fd = open(argv[1],O_RDONLY)) < 0){
+    printf("ERRORE nell' apertura del file, forse non è un file o non si hanno permission for read\n");
+    exit(2);
+}
+int n = atoi(argv[2]);
+if(n < 0){
+    printf("ERRORE: il numero passato non è un intero positivo\n");
+    exit(3);
+
+}
+int count=1;//perchè parto dalla 1 linea per arrivare alla n-esima
+char c;
+printf("La %d-esima riga:\n",n);
+while(read(fd,&c,1) == 1){
+     if(count == n){
+        write(0,&c,1);
+    }
+    if(c=='\n'){
+        ++count;
+    }
+   
+}
+
+if(count-1 <= n){
+    printf("NON ESISTE\n");
+}
+
+exit(0);
+}

@@ -1,0 +1,27 @@
+//File che simula comando ls -l in ambiente kernel generato execv che cerca un eseguibile nella directory specificata
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <string.h>
+
+int main(int argc,char *argv[]){
+    if(argc != 1 ){
+        printf("ERRORE NON BISOGNA PASSARE alcun Comando come argomento al file eseguibile qua è il cmdls");
+        exit(1);
+    }
+
+    char *ci[3];
+
+    ci[0]="ls";
+    printf("ciaooo %s\n",ci[0]);
+
+    ci[1]="-l";
+    ci[2]=(char *)0;
+    printf("ciaooo2 %s\n",ci[1]);
+    execv("/bin/ls",ci);
+    printf("Errore nella execv di ls\n");
+    exit(5);
+
+}

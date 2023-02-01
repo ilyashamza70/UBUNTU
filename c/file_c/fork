@@ -1,0 +1,59 @@
+
+//file con uso di fork
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <string.h>
+
+int main(int argc, char *argv[]){
+    int pid, pidfiglio;
+    int status,exit_s;
+    char eseguibile[50];
+    if((pid = fork()) < 0){
+        printf("errore nella fork\n");
+        exit(1);
+    }
+
+    if(pid==0){
+        
+        scanf("%s",eseguibile);
+        
+        printf("finito pid figlio1 dopo aver eseguito una read in c con scanf(da stdin) e salvato in eseguibile \n");
+        printf("Da eseguire %s, versione 1",eseguibile);
+        char *argv[3];
+        argv[0]="ls";
+        argv[1]="-l";
+        argv[2]=(char *)0;
+        int c=execv("/bin/ls",argv);
+        printf("ERRORE NELLA EXECV \n");
+        exit(05);
+        
+    }
+
+    printf("generato figlio con pid %d\n",pid);
+    if((pidfiglio=wait(&status))< 0){
+        printf("ERRORE nella wait del padre\n");
+        exit(2);
+    }
+
+    if(pid==pidfiglio){
+        printf("Terminato figlio con pid %d\n",pid);
+    }else{
+        printf("Errore il pid figlio %d non corrisponde al pid della fork %d\n",pid,pidfiglio);
+        exit(3);
+    }
+    if(status & 0xFF != 0){
+        printf("Figlio terminato in modo involontario (anomalo)\n");
+    }else{
+        exit_s=status >> 8;
+        exit_s &= 0xFF;
+        printf("Per il figlio %d lo stato di exit ha ritornato %d\n",pidfiglio,exit_s);
+    }
+    exit(0);
+
+
+
+
+}

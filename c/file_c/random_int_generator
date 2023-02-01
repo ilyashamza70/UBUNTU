@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <time.h>
+
+
+
+int main(int argc,char *argv[]){
+    if(argc != 1){
+        printf("ERRORE: la sintassi per questo file -o %s non contiene alcun argomento\n",argv[0]);
+        exit(1);
+    }
+    int pid;
+    int pid_f;
+    srand(time(NULL));
+    if((pid=fork()) < 0){
+        printf("ERRORE NELLA FORK\n");
+        exit(2);
+    }
+    if(pid == 0){
+        printf("ID del processo figlio è: %d, mentre il id di mio padre è: %d\n",getpid(),getppid());
+        int random;
+        
+        random=rand() % 100;
+        exit(random);   
+    }
+    int status;
+    int exit_status;
+    if((pid_f = (wait(&status))) < 0){
+        printf("ERRORE NELLA WAIT\n");
+        exit(3);
+    }
+    if(pid == pid_f){
+        printf("Figlio con id %d terminato con successo \n",pid_f);
+
+    }else{
+        printf("Errore il pid della wait non corrisponde al pid della fork \n");
+        exit(6);
+    }
+
+    if(status & 0xFF != 0){
+        printf("ERRORE ANOMALO HA TERMINA PROCESSO FIGLIO %d\n",pid_f);
+    }else{
+        exit_status=status >> 8;
+        exit_status &= 0xFF;
+        printf("Il valore random tornato dal processo figlio %d è %d\n",pid_f,exit_status);
+
+    }
+    exit(1);
+
+
+
+
+
+}

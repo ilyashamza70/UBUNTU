@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+int stampa(int fd,int n){
+    int nread;
+    char c=0;
+    int count=0;
+    while((nread = read(fd,&c,1))== 1){
+        if(count == n)
+            break;
+        if(c == '\n'){
+            ++count;
+        }
+
+        write(1,&c,1);
+
+        
+    }
+    return 0;
+}
+
+int main(int argc,char *argv[]){
+if(argc != 3){
+    printf("ERRORE deve essere passato almeno 2 argopmento mentre ne sono stati passati %d\n",argc-1);
+    exit(1);
+}
+
+int fd;
+if((fd=open(argv[1],O_RDONLY)) < 0){
+    printf("ERRORE: il primo argomento non è un file o non si hanno permesssi per aprirlo");
+    exit(4);
+}
+
+if(argv[2][0] != '-'){
+    printf("il numero di linee deve essre dato nella forma -num ");
+
+}
+char *c;
+c= argv[2];
+int n= atoi(c);
+
+int status=stampa(fd,n);
+if(status != 0){
+    exit (3);
+}
+exit(0);
+}

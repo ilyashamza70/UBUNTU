@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main(){
+    int pid;
+    printf("UNO \n");
+    if((pid = fork()) < 0){
+        //La fork è fallita
+        printf("Errore nella fork");
+        exit(1);
+    }
+
+    if(pid == 0){
+        //Figlio che ritorna il code in pid deve essere il pid del filio stesso in caso di successo
+        printf("Due \n");
+        exit(0);//solo dal figlio che entra qui e poi termina ritornando in pid il suo pid
+    }
+    //Adesso sono nel pro cesso padre.
+    printf("Ho creato un processo figlio con pid = %d\n",pid);
+    exit(0); //solo del pèadre 
+
+}

@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#define PERM 0644   //dirittti in ottale per creazione di file
+
+//File append
+int append(char *f1){
+    int infile, outfile, nread;
+    char buffer[BUFSIZ];
+    if((outfile = open(f1,O_WRONLY)) < 0){
+        outfile = creat(f1,PERM);       //se nopn esiste creao il file
+        printf("Il file %s non esisteva ma ora esiste\n",f1);                 
+    }
+    else {
+        lseek(outfile,0L,2);           //se esite mi metto alla fine cosi da poter scriverci
+    }
+
+    while((nread = read(0,buffer,BUFSIZ)) > 0){
+        if(write(outfile,buffer,nread) < nread){
+            close(outfile);
+            return 2;
+
+        }
+    }
+
+    close(outfile);
+    return 0;
+
+
+}
+
+
+int main(int argc, char *argv[]){
+    int status;
+    int fd;
+    if(argc != 2 ){
+        printf("Errore sul numero di argomenti passati: %d devono essere esattamente 1\n",argc-1);
+        exit(1);
+    }
+    
+    status= append(argv[1]);
+    if(status != 0 ){
+        printf("Ci sono stati errore nell' append al file %s \n",argv[1]);
+        exit(2);
+    }
+    exit(0);
+
+}

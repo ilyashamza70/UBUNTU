@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <fcntl.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(int argc,char *argv[]){
+    if(argc < 4){
+        printf("Errore la sintassi per questo file è ualmeno due nomi di file e come ultimo argomento un solo carattere\n");
+        exit(1);
+    }
+    
+    int N=argc - 2; //numero di file da aprire
+    if(strlen(argv[argc-1])!= 1){
+        printf("Errore l' ultimo argomento deve essere un solo carattere mentre è %s\n",argv[argc-1]);
+    }
+    char c =argv[argc-1][0]; 
+    int pid, pid_f, status, exit_s;
+    //srand(time(NULL));
+    printf("ID del processo padre è %d mentre N passato è %d\n",getpid(),N);
+    int fd;
+    for(int i=0 ;i<N;++i){
+        if((pid = fork()) < 0){
+            printf("Errore nella %d - esima fork\n",i);
+            continue;
+        }
+        if(pid==0){
+            if((fd = open(argv[i+1],O_RDONLY)) < 0){
+                printf("Errore nell' apertura del file %d-esimo o non esiste",i);
+                continue;
+            }
+            printf("--%d) Sono nel processo figlio %d-esimo con id %d con relativo id padre %d\n",i,i,getpid(),getppid());
+            char tmp;
+            int ret= 0 ;
+            while((read(fd,&tmp,1)) == 1 ){
+                if(tmp == c){
+                    ++ret;
+                }
+
+            }
+            exit(ret);
+        }
+    }
+    for(int i=0;i<N;++i){
+        if((pid_f = wait(&status)) < 0){
+            printf("Errore nella wait \n");
+            exit(3);
+        }
+      
+        if(status & 0xFF != 0){
+            printf("Errore exit anomala dal processo figlio con pid %d\n",pid);
+
+        }else{
+            exit_s=(status >> 8 ) & 0xFF;
+            printf("--%d)Il processo con id %d ha contato: %d occorrenze di %c\n",i,pid_f,exit_s,c); 
+        }
+        }
+    exit(0);
+
+
+}
